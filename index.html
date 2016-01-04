@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Draggable + Sortable</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+ 
+  <style>
+
+  ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+  li { margin: 5px; padding: 5px; width: 150px; }
+  </style>
+  <script>
+  $(function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    $( "#draggable" ).draggable({
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+  });
+  </script>
+</head>
+<body>
+<div class="container">
+  <ul>
+    <li id="draggable" class="ui-state-highlight">Drag me down</li>
+  </ul>
+   
+  <ul id="sortable">
+    <li class="ui-state-default" id="A">A</li>
+    <li class="ui-state-default"id="B">B</li>
+    <li class="ui-state-default"id="C">C</li>
+    <li class="ui-state-default"id="D">D</li>
+    <li class="ui-state-default"id="E">E</li>
+  </ul>
+</div> 
+</body>
+  <script type="text/javascript">
+    
+    var getValue = function(){
+        var a = $("#A").position().top;
+        var b = $("#B").position().top;
+        var c = $("#C").position().top;
+        var d = $("#D").position().top;
+        var e = $("#E").position().top;
+
+        var results = [{key: 'A', value: a}, {key: 'B', value: b}, {key: 'C', value: c}, {key: 'D', value: d}, {key: 'E', value: e}];
+
+        results.sort(function(obj1, obj2) {
+          return obj2.value - obj1.value;
+        });
+
+        function logArrayElements(element, index, array) {
+          element.value =index;
+          console.log(element.key +" = "+element.value);
+        }
+        results.forEach(logArrayElements);
+    };
+    
+  </script>
+</html>
