@@ -44,19 +44,24 @@
 </body>
   <script type="text/javascript">
     
-    var getValue = function(){
+
+    var getRanking = function(){
+        // get top position
         var a = $("#A").position().top;
         var b = $("#B").position().top;
         var c = $("#C").position().top;
         var d = $("#D").position().top;
         var e = $("#E").position().top;
 
+        // create results array
         var results = [{key: 'A', value: a}, {key: 'B', value: b}, {key: 'C', value: c}, {key: 'D', value: d}, {key: 'E', value: e}];
 
+        // sort objects by value
         results.sort(function(obj1, obj2) {
           return obj2.value - obj1.value;
         });
 
+        // give each object its rank as value property
         function logArrayElements(element, index, array) {
           element.value =index;
           console.log(element.key +" = "+element.value);
